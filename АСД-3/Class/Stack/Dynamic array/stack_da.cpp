@@ -1,21 +1,24 @@
 #include "stack_da.h"
 #include <iostream>
 
-stack_da::stack_da(int initial_capacity) {
+template<typename T>
+stack_da<T>::stack_da(int initial_capacity) {
     capacity_ = initial_capacity;
-    data_ = new int[capacity_];
-    top_index_ = -1; 
+    data_ = new T[capacity_];
+    top_index_ = -1;
 }
 
-stack_da::~stack_da() {
-    delete[] data_;  
+template<typename T>
+stack_da<T>::~stack_da() {
+    delete[] data_;
 }
 
 // Adding a new element to the stack
-void stack_da::push(int value) {
+template<typename T>
+void stack_da<T>::push(T value) {
     if (top_index_ == capacity_ - 1) {
         int new_capacity = capacity_ * 2;
-        int* new_data = new int[new_capacity];
+        T* new_data = new T[new_capacity];
 
         for (int i = 0; i <= top_index_; ++i) {
             new_data[i] = data_[i];
@@ -30,30 +33,35 @@ void stack_da::push(int value) {
 }
 
 // Removing an element from the stack
-void stack_da::pop() {
+template<typename T>
+void stack_da<T>::pop() {
     if (top_index_ >= 0) {
         --top_index_;
     } else {
-        std::cout << "stack_sll is empty. Cannot pop.\n";
+        std::cout << "stack_da is empty. Cannot pop.\n";
     }
 }
 
 // Reading an element from the top of the stack
-int stack_da::top() const {
+template<typename T>
+T stack_da<T>::top() const {
     if (top_index_ >= 0) {
         return data_[top_index_];
     } else {
-        std::cout << "stack_sll is empty. Cannot get top element.\n";
-        return -1;  
+        std::cout << "stack_da is empty. Cannot get top element.\n";
+        return T();  // Default value for the type T (assuming T has a default constructor)
     }
 }
 
 // Current number of elements in the stack
-int stack_da::size() const {
+template<typename T>
+int stack_da<T>::size() const {
     return top_index_ + 1;
 }
 
+
 // Clearing the stack
-void stack_da::clear() {
+template<typename T>
+void stack_da<T>::clear() {
     top_index_ = -1;
 }
