@@ -9,6 +9,7 @@ stack_sll::~stack_sll() {
     clear();
 }
 
+// Adding a new element to the stack
 void stack_sll::push(int value) {
     node* new_node = new node(value);
     if (top_node == nullptr) {
@@ -19,6 +20,7 @@ void stack_sll::push(int value) {
     }
 }
 
+// Removing an element from the stack
 void stack_sll::pop() {
     if (top_node != nullptr) {
         node* temp = top_node;
@@ -29,6 +31,7 @@ void stack_sll::pop() {
     }
 }
 
+// Reading an element from the top of the stack
 int stack_sll::top() const {
     if (top_node != nullptr) {
         return top_node->data;
@@ -38,10 +41,12 @@ int stack_sll::top() const {
     }
 }
 
+// Check if the stack is empty
 bool stack_sll::is_empty() const {
     return top_node == nullptr;
 }
 
+// Clearing the stack
 void stack_sll::clear() {
     while (top_node != nullptr) {
         node* temp = top_node;
@@ -50,6 +55,7 @@ void stack_sll::clear() {
     }
 }
 
+// List copy operation
 stack_sll::stack_sll(const stack_sll& other_stack) {
     top_node = nullptr;
 
@@ -67,6 +73,7 @@ stack_sll::stack_sll(const stack_sll& other_stack) {
     }
 }
 
+// Overloading the '+' operator
 stack_sll stack_sll::operator+(const stack_sll& other_stack) const {
     stack_sll result(*this);
     stack_sll temp_stack(other_stack);
@@ -79,6 +86,7 @@ stack_sll stack_sll::operator+(const stack_sll& other_stack) const {
     return result;
 }
 
+// Overloading the '*' operator
 stack_sll stack_sll::operator*(int factor) const {
     stack_sll result;
 
