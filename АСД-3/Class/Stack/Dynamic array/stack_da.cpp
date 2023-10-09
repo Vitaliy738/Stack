@@ -49,7 +49,7 @@ T stack_da<T>::top() const {
         return data_[top_index_];
     } else {
         std::cout << "stack_da is empty. Cannot get top element.\n";
-        return T();  // Default value for the type T (assuming T has a default constructor)
+        return T(); 
     }
 }
 
