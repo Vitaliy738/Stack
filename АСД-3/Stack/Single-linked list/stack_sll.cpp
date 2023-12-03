@@ -1,5 +1,4 @@
 #include "stack_sll.h"
-#include <iostream>
 
 template <typename T>
 stack_sll<T>::stack_sll() : top_node(nullptr) {}
@@ -9,7 +8,12 @@ stack_sll<T>::~stack_sll() {
     clear();
 }
 
-// Adding a new element to the stack
+/**
+ * @brief Adding a new element to the top of the stack.
+ *
+ * @param value A value that is added to the stack.
+ *
+ ***/
 template <typename T>
 void stack_sll<T>::push(T value) {
     node<T>* new_node = new node<T>(value);
@@ -21,7 +25,9 @@ void stack_sll<T>::push(T value) {
     }
 }
 
-// Removing an element from the stack
+/**
+ * @brief Removing an element from the top of the stack.
+ **/
 template <typename T>
 void stack_sll<T>::pop() {
     if (top_node != nullptr) {
@@ -29,28 +35,39 @@ void stack_sll<T>::pop() {
         top_node = top_node->next;
         delete temp;
     } else {
-        std::cout << "Stack is empty. Cannot pop.\n";
+        // Stack is empty. Cannot pop.
     }
 }
 
-// Reading an element from the top of the stack
+/**
+ * @brief Reading an element from the top of the stack.
+ *
+ * @return An element from the top of the stack.
+ * If stack is empty - default value for the type T.
+ **/
 template <typename T>
 T stack_sll<T>::top() const {
     if (top_node != nullptr) {
         return top_node->data;
     } else {
-        std::cout << "Stack is empty. Cannot get top element.\n";
+        // Stack is empty. Cannot get top element.
         return T(); 
     }
 }
 
-// Check if the stack is empty
+/**
+ * @brief Check if the stack is empty.
+ *
+ * @return Boolean value of the stack capacity
+ **/
 template <typename T>
 bool stack_sll<T>::is_empty() const {
     return top_node == nullptr;
 }
 
-// Clearing the stack
+/**
+ * @brief Clearing the stack
+ **/
 template <typename T>
 void stack_sll<T>::clear() {
     while (top_node != nullptr) {
@@ -60,7 +77,12 @@ void stack_sll<T>::clear() {
     }
 }
 
-// List copy operation
+/**
+ * @brief Stack copy operation.
+ * Clears the contents of the current stack and copies the contents of another stack to it.
+ *
+ * @param other_stack Stack to copy
+ **/
 template <typename T>
 stack_sll<T>::stack_sll(const stack_sll& other_stack) : top_node(nullptr) {
     node<T>* current = other_stack.top_node;
@@ -77,7 +99,11 @@ stack_sll<T>::stack_sll(const stack_sll& other_stack) : top_node(nullptr) {
     }
 }
 
-// Overloading the '+' operator
+/**
+ * @brief Adds the value of another stack to the top of the current stack.
+ *
+ * @return The result of combining stacks.
+ **/
 template <typename T>
 stack_sll<T> stack_sll<T>::operator+(const stack_sll& other_stack) const {
     stack_sll<T> result(*this);
@@ -86,24 +112,6 @@ stack_sll<T> stack_sll<T>::operator+(const stack_sll& other_stack) const {
     while (!temp_stack.is_empty()) {
         result.push(temp_stack.top());
         temp_stack.pop();
-    }
-
-    return result;
-}
-
-// Overloading the '*' operator
-template <typename T>
-stack_sll<T> stack_sll<T>::operator*(int factor) const {
-    stack_sll<T> result;
-
-    stack_sll<T> temp_stack(*this);
-
-    for (int i = 0; i < factor; ++i) {
-        node<T>* temp_current = temp_stack.top_node;
-        while (temp_current != nullptr) {
-            result.push(temp_current->data);
-            temp_current = temp_current->next;
-        }
     }
 
     return result;
